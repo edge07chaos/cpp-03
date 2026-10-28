@@ -2,9 +2,9 @@
 #include <iostream>
 
 ClapTrap::ClapTrap() : name("Default"),
-											 hitPoints(100),
-											 energyPoints(50),
-											 attackDamage(20)
+											 hitPoints(10),
+											 energyPoints(10),
+											 attackDamage(0)
 {
 	std::cout
 			<< "ClapTrap "
@@ -23,9 +23,9 @@ ClapTrap::~ClapTrap()
 }
 
 ClapTrap::ClapTrap(const std::string &name) : name(name),
-																							hitPoints(100),
-																							energyPoints(50),
-																							attackDamage(20)
+																							hitPoints(10),
+																							energyPoints(10),
+																							attackDamage(0)
 {
 	std::cout
 			<< "ClapTrap "
