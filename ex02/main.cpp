@@ -1,30 +1,42 @@
+#include "ClapTrap.hpp"
 #include "ScavTrap.hpp"
+#include "FragTrap.hpp"
 #include <iostream>
 
 int main(void)
 {
-    std::cout << "=== 1. CONSTRUCTION & DESTRUCTION CHAINING ===" << std::endl;
+    std::cout << "=== 1. FRAGTRAP CONSTRUCTOR & DESTRUCTOR CHAINING ===" << std::endl;
     {
-        ScavTrap scav1("Sergeant");
-    } // scav1 goes out of scope here to test destructor order!
+        FragTrap frag1("Fraggy");
+    } // frag1 goes out of scope here to verify destructor sequence!
 
-    std::cout << "\n=== 2. ATTACK & SPECIAL CAPACITY ===" << std::endl;
-    ScavTrap scav2("Guardian");
+    std::cout << "\n=== 2. FRAGTRAP ACTIONS & SPECIAL CAPACITY ===" << std::endl;
+    FragTrap frag2("HighFiver");
 
-    scav2.attack("Intruder"); // Should use ScavTrap's attack message!
-    scav2.guardGate();        // ScavTrap's unique ability
+    frag2.attack("Target Dummy"); // Uses inherited ClapTrap attack with 30 Damage!
+    frag2.takeDamage(40);
+    frag2.beRepaired(25);
+    frag2.highFivesGuys();        // FragTrap special ability!
 
-    std::cout << "\n=== 3. INHERITED DAMAGE & REPAIR LOGIC ===" << std::endl;
-    scav2.takeDamage(30);
-    scav2.beRepaired(20);
+    std::cout << "\n=== 3. COMPARISON: CLAPTRAP vs SCAVTRAP vs FRAGTRAP ===" << std::endl;
+    ClapTrap clap("BasicClap");
+    ScavTrap scav("GateKeeper");
+    FragTrap frag("BigBoi");
+
+    clap.attack("Enemy"); // Should cause 0 damage
+    scav.attack("Enemy"); // Should cause 20 damage (ScavTrap message)
+    frag.attack("Enemy"); // Should cause 30 damage (ClapTrap message)
+
+    scav.guardGate();
+    frag.highFivesGuys();
 
     std::cout << "\n=== 4. ORTHODOX CANONICAL FORM ===" << std::endl;
-    ScavTrap original("OriginalScav");
-    ScavTrap copy(original); // Copy constructor
+    FragTrap original("OriginalFrag");
+    FragTrap copy(original);
 
-    ScavTrap assigned("TempScav");
-    assigned = original; // Copy assignment operator
+    FragTrap assigned("TempFrag");
+    assigned = original;
 
-    std::cout << "\n=== 5. END OF MAIN (DESTRUCTORS) ===" << std::endl;
+    std::cout << "\n=== 5. END OF MAIN (STACK DESTRUCTION) ===" << std::endl;
     return 0;
 }
