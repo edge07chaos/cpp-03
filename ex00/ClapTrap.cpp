@@ -30,7 +30,7 @@ ClapTrap::ClapTrap(const std::string &name) : name(name),
 	std::cout
 			<< "ClapTrap "
 			<< this->name
-			<< " Custom constructor called"
+			<< " parameterized constructor called"
 			<< std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap &obj) : name(obj.name),
