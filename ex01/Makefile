@@ -1,4 +1,4 @@
-NAME = ClapTrap
+NAME = ScavTrap
 
 #files
 OBJS = main.o ClapTrap.o ScavTrap.o

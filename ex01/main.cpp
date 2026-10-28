@@ -1,40 +1,30 @@
-#include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 #include <iostream>
 
 int main(void)
 {
-    std::cout << "=== 1. CONSTRUCTORS & BASIC ACTIONS ===" << std::endl;
-    ClapTrap clap1("Clippy");
-    ClapTrap clap2("Trappy");
+    std::cout << "=== 1. CONSTRUCTION & DESTRUCTION CHAINING ===" << std::endl;
+    {
+        ScavTrap scav1("Sergeant");
+    } // scav1 goes out of scope here to test destructor order!
 
-    clap1.attack("Trappy");
-    clap2.takeDamage(0); // 0 damage test
-    clap2.takeDamage(5);
-    clap2.beRepaired(3);
+    std::cout << "\n=== 2. ATTACK & SPECIAL CAPACITY ===" << std::endl;
+    ScavTrap scav2("Guardian");
 
-    std::cout << "\n=== 2. DEAD CLAPTRAP TEST (NO HP) ===" << std::endl;
-    clap2.takeDamage(20); // Overkill damage (HP goes to 0)
-    clap2.attack("Clippy"); // Should fail (no HP)
-    clap2.beRepaired(5);    // Should fail (no HP)
-    clap2.takeDamage(5);    // Should fail (already dead)
+    scav2.attack("Intruder"); // Should use ScavTrap's attack message!
+    scav2.guardGate();        // ScavTrap's unique ability
 
-    std::cout << "\n=== 3. ENERGY DEPLETION TEST ===" << std::endl;
-    ClapTrap tired("TiredTrap");
-    // ClapTrap starts with 10 energy points. 
-    // Perform 10 actions to drain all energy.
-    for (int i = 0; i < 10; ++i) {
-        tired.beRepaired(1);
-    }
-    // 11th action should fail due to no energy points left
-    tired.attack("Target");
-    tired.beRepaired(1);
+    std::cout << "\n=== 3. INHERITED DAMAGE & REPAIR LOGIC ===" << std::endl;
+    scav2.takeDamage(30);
+    scav2.beRepaired(20);
 
-    std::cout << "\n=== 4. ORTHODOX CANONICAL FORM TEST ===" << std::endl;
-    ClapTrap original("Original");
-    ClapTrap copy(original); // Copy Constructor
-    ClapTrap assigned("Assigned");
-    assigned = original;     // Copy Assignment Operator
+    std::cout << "\n=== 4. ORTHODOX CANONICAL FORM ===" << std::endl;
+    ScavTrap original("OriginalScav");
+    ScavTrap copy(original); // Copy constructor
 
-    std::cout << "\n=== 5. DESTRUCTORS ===" << std::endl;
+    ScavTrap assigned("TempScav");
+    assigned = original; // Copy assignment operator
+
+    std::cout << "\n=== 5. END OF MAIN (DESTRUCTORS) ===" << std::endl;
     return 0;
 }
